@@ -10,7 +10,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xff92B7CB),
+          foregroundColor: Color(0xffEDF7D0),
+        ),
+      ),
       home: ChatsPage(
         chats: chats,
       ),
