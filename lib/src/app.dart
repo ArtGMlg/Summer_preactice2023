@@ -13,9 +13,11 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff92B7CB),
+          backgroundColor: Color(0xffB7B5E4),
           foregroundColor: Color(0xffEDF7D0),
         ),
+        scaffoldBackgroundColor: const Color(0xffB7B5E4),
+        fontFamily: "Ubuntu",
       ),
       home: ChatsPage(
         chats: chats,

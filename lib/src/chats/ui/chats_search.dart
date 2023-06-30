@@ -67,6 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: IconButton(
           onPressed: () => {
             _searchQueryController.clear(),
@@ -79,7 +80,7 @@ class _SearchScreenState extends State<SearchScreen> {
           decoration: const InputDecoration(
             hintText: "Найти...",
             border: InputBorder.none,
-            hintStyle: TextStyle(color: Colors.white30),
+            hintStyle: TextStyle(color: Colors.white60),
           ),
           style: const TextStyle(
             color: Colors.white,
@@ -88,12 +89,25 @@ class _SearchScreenState extends State<SearchScreen> {
           onSubmitted: (String query) => _searchChats(query),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: _filteredChats.length,
-              itemBuilder: (context, index) {
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xffEDF7D0),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50.0),
+            topRight: Radius.circular(50.0),
+          ),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50.0),
+            topRight: Radius.circular(50.0),
+          ),
+          child: ListView.builder(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+            itemCount: _filteredChats.length,
+            itemBuilder: (context, index) {
+              if (_filteredChats[index].lastMessage != null) {
                 return ListTile(
                   onTap: () => {},
                   leading: _filteredChats[index].userAvatar != null
@@ -102,20 +116,26 @@ class _SearchScreenState extends State<SearchScreen> {
                             "${_filteredChats[index].userAvatar}",
                           ),
                         )
-                      : CircleAvatar(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: <Color>[
-                                    Color((math.Random().nextDouble() *
-                                                0xFFFFFF)
-                                            .toInt())
-                                        .withOpacity(1.0),
-                                    Colors.white,
-                                  ]),
+                      : Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: <Color>[
+                                  Color((math.Random().nextDouble() * 0xFFFFFF)
+                                          .toInt())
+                                      .withOpacity(1.0),
+                                  Colors.white,
+                                ]),
+                          ),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Text(
+                              _filteredChats[index].userName[0],
+                              style: const TextStyle(
+                                  fontFamily: "Comfortaa-Bold",
+                                  color: Colors.white),
                             ),
                           ),
                         ),
@@ -129,22 +149,27 @@ class _SearchScreenState extends State<SearchScreen> {
                     children: [
                       Text(
                         parseDate(_filteredChats[index].date),
-                        style: const TextStyle(fontSize: 11),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontFamily: "Ubuntu-Light",
+                        ),
                       ),
                       Badge(
                         isLabelVisible:
                             _filteredChats[index].countUnreadMessages != 0,
-                        backgroundColor: const Color(0xff92B7CB),
+                        backgroundColor: const Color(0xffB7B5E4),
                         label: Text(
                             "${_filteredChats[index].countUnreadMessages}"),
                       )
                     ],
                   ),
                 );
-              },
-            ),
+              } else {
+                return Container();
+              }
+            },
           ),
-        ],
+        ),
       ),
     );
   }

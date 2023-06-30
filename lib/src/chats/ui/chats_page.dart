@@ -2,6 +2,7 @@ import 'package:bootcamp_project/src/chats/models/chat.dart';
 import 'package:bootcamp_project/src/chats/ui/chats_search.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'dart:ui';
 
 class ChatsPage extends StatelessWidget {
   final List<Chat> chats;
@@ -66,7 +67,10 @@ class ChatsPage extends StatelessWidget {
               flex: 9,
               child: Column(
                 children: [
-                  Text("Мессенджер"),
+                  Text(
+                    "Мессенджер",
+                    style: TextStyle(fontFamily: "Comfortaa-Bold"),
+                  ),
                 ],
               ),
             ),
@@ -92,94 +96,170 @@ class ChatsPage extends StatelessWidget {
             )
           ],
         ),
+        elevation: 0,
       ),
       drawer: const Drawer(),
-      body: ListView.builder(
-        itemCount: chats.length,
-        itemBuilder: (context, index) {
-          if (chats[index].lastMessage != null) {
-            return ListTile(
-              onTap: () => {},
-              leading: chats[index].userAvatar != null
-                  ? CircleAvatar(
-                      backgroundImage: AssetImage(
-                        "${chats[index].userAvatar}",
-                      ),
-                    )
-                  : CircleAvatar(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: <Color>[
-                                Color((math.Random().nextDouble() * 0xFFFFFF)
-                                        .toInt())
-                                    .withOpacity(1.0),
-                                Colors.white,
-                              ]),
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xffEDF7D0),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50.0),
+            topRight: Radius.circular(50.0),
+          ),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50.0),
+            topRight: Radius.circular(50.0),
+          ),
+          child: ListView.builder(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+            itemCount: chats.length,
+            itemBuilder: (context, index) {
+              if (chats[index].lastMessage != null) {
+                return ListTile(
+                  onTap: () => {},
+                  leading: chats[index].userAvatar != null
+                      ? CircleAvatar(
+                          backgroundImage: AssetImage(
+                            "${chats[index].userAvatar}",
+                          ),
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: <Color>[
+                                  Color((math.Random().nextDouble() * 0xFFFFFF)
+                                          .toInt())
+                                      .withOpacity(1.0),
+                                  Colors.white,
+                                ]),
+                          ),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Text(
+                              chats[index].userName[0],
+                              style: const TextStyle(
+                                  fontFamily: "Comfortaa-Bold",
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                  title: Text(
+                    chats[index].userName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    chats[index].lastMessage.toString(),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        parseDate(chats[index].date),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontFamily: "Ubuntu-Light",
                         ),
                       ),
-                    ),
-              title: Text(chats[index].userName),
-              subtitle: Text(
-                chats[index].lastMessage.toString(),
-                overflow: TextOverflow.ellipsis,
-              ),
-              trailing: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    parseDate(chats[index].date),
-                    style: const TextStyle(fontSize: 11),
+                      Badge(
+                        isLabelVisible: chats[index].countUnreadMessages != 0,
+                        backgroundColor: const Color(0xffB7B5E4),
+                        label: Text("${chats[index].countUnreadMessages}"),
+                      )
+                    ],
                   ),
-                  Badge(
-                    isLabelVisible: chats[index].countUnreadMessages != 0,
-                    backgroundColor: const Color(0xff92B7CB),
-                    label: Text("${chats[index].countUnreadMessages}"),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 54,
+        decoration: const BoxDecoration(color: Color(0xffEDF7D0)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size(MediaQuery.of(context).size.width / 3, 54),
+              ),
+              onPressed: () => {},
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.call_outlined,
+                    color: Color(0xff58576b),
+                  ),
+                  Text(
+                    "Звонки",
+                    style: TextStyle(
+                      color: Color(0xff58576b),
+                      fontFamily: "Ubuntu-Light",
+                      fontSize: 13,
+                    ),
                   )
                 ],
               ),
-            );
-          } else {
-            return Container();
-          }
-        },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size(MediaQuery.of(context).size.width / 3, 54),
+              ),
+              onPressed: () => {},
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.message_outlined,
+                    color: Color(0xFF9A97C5),
+                  ),
+                  Text(
+                    "Мессенджер",
+                    style: TextStyle(
+                      color: Color(0xFF9A97C5),
+                      fontFamily: "Ubuntu-Light",
+                      fontSize: 13,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size(MediaQuery.of(context).size.width / 3, 54),
+              ),
+              onPressed: () => {},
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.account_circle_outlined,
+                    color: Color(0xff58576b),
+                  ),
+                  Text(
+                    "Профиль",
+                    style: TextStyle(
+                      color: Color(0xff58576b),
+                      fontFamily: "Ubuntu-Light",
+                      fontSize: 13,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      // ListView(
-      //   padding: EdgeInsets.zero,
-      //   children: [
-      //     ListTile(
-      //       onTap: () => {},
-      //       leading: const CircleAvatar(
-      //         backgroundImage: AssetImage('assets/avatars/1.jpg'),
-      //       ),
-      //       title: const Text("Роман"),
-      //       subtitle: const Text(
-      //         "Привет, ты подготовился к буткемпу?",
-      //         overflow: TextOverflow.ellipsis,
-      //       ),
-      //       trailing: const Column(
-      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //         children: [
-      //           Text(
-      //             "1 фев",
-      //             style: TextStyle(fontSize: 11),
-      //           ),
-      //           Padding(
-      //             padding: EdgeInsets.only(bottom: 0.0),
-      //             child: Badge(
-      //               backgroundColor: Color(0xff92B7CB),
-      //               label: Text("100"),
-      //               alignment: Alignment.center,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
