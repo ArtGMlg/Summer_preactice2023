@@ -74,28 +74,30 @@ class BodyBuilder {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: LinearGradient(
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                    colors: <Color>[
-                                      Color((math.Random().nextDouble() *
-                                                  0xFFFFFF)
-                                              .toInt())
-                                          .withOpacity(1.0),
-                                      Colors.white,
-                                    ]),
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: <Color>[
+                                    Color((math.Random().nextDouble() *
+                                                0xFFFFFF)
+                                            .toInt())
+                                        .withOpacity(1.0),
+                                    Colors.white,
+                                  ],
+                                ),
                               ),
                               child: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  child: BorderedText(
-                                    strokeColor: Colors.black,
-                                    strokeWidth: 2.4,
-                                    child: Text(
-                                      chats[index].userName[0],
-                                      style: const TextStyle(
-                                          fontFamily: "Comfortaa-Bold",
-                                          color: Colors.white),
-                                    ),
-                                  )),
+                                backgroundColor: Colors.transparent,
+                                child: BorderedText(
+                                  strokeColor: Colors.black,
+                                  strokeWidth: 2.4,
+                                  child: Text(
+                                    chats[index].userName[0],
+                                    style: const TextStyle(
+                                        fontFamily: "Comfortaa-Bold",
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
                             ),
                       title: Text(
                         chats[index].userName,
