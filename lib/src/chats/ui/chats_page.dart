@@ -2,7 +2,6 @@ import 'package:bootcamp_project/src/chats/models/chat.dart';
 import 'package:bootcamp_project/src/chats/ui/chats_search.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'dart:ui';
 
 class ChatsPage extends StatelessWidget {
   final List<Chat> chats;
