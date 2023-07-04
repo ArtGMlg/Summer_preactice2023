@@ -2,6 +2,7 @@ import 'package:bootcamp_project/src/chats/models/chat.dart';
 import 'package:bootcamp_project/src/chats/ui/chats_search.dart';
 import 'package:flutter/material.dart';
 import 'package:bootcamp_project/src/chats/servicies/body_builder.dart';
+import 'package:bootcamp_project/src/chats/servicies/b_t_icons_icons.dart';
 
 class ChatsPage extends StatelessWidget {
   final List<Chat> chats;
@@ -22,7 +23,10 @@ class ChatsPage extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     onPressed: () => {},
-                    icon: const Icon(Icons.horizontal_split),
+                    icon: const Icon(
+                      BTIcons.list,
+                      size: 25,
+                    ),
                   ),
                 ],
               ),
@@ -52,7 +56,8 @@ class ChatsPage extends StatelessWidget {
                       )
                     },
                     icon: const Icon(
-                      Icons.search,
+                      BTIcons.search__1_,
+                      size: 20,
                     ),
                   ),
                 ],
@@ -79,8 +84,9 @@ class ChatsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.call_outlined,
+                    BTIcons.telephone,
                     color: Color(0xff58576b),
+                    size: 18,
                   ),
                   Text(
                     "Звонки",
@@ -102,13 +108,14 @@ class ChatsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.message_outlined,
-                    color: Color(0xFF9A97C5),
+                    BTIcons.chat_dots,
+                    color: Color(0xFF7C79AD),
+                    size: 18,
                   ),
                   Text(
                     "Мессенджер",
                     style: TextStyle(
-                      color: Color(0xFF9A97C5),
+                      color: Color(0xFF7C79AD),
                       fontFamily: "Ubuntu-Light",
                       fontSize: 13,
                     ),
@@ -125,8 +132,9 @@ class ChatsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.account_circle_outlined,
+                    BTIcons.person_circle,
                     color: Color(0xff58576b),
+                    size: 18,
                   ),
                   Text(
                     "Профиль",

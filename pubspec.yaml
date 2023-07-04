@@ -97,6 +97,9 @@ flutter:
     - family: Noto Color Emoji
       fonts:  
         - asset: assets/fonts/NotoColorEmoji-Regular.ttf
+    - family: BTIcons
+      fonts:  
+        - asset: assets/fonts/BTIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
